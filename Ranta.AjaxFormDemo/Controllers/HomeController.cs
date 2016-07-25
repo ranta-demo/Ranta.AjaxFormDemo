@@ -27,7 +27,7 @@ namespace Ranta.AjaxFormDemo.Controllers
                 ModelState.AddModelError("ok", "OK");
             }
 
-            return Json(2);
+            return Json(new { Name = "zhang" });
         }
     }
 }

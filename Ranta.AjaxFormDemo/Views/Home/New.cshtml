@@ -8,9 +8,37 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        function confirm() {
+            console.log("1 - confirm");
+            return true;
+        }
+        function begin() {
+            console.log("2 - begin");
+        }
+        function success() {
+            console.log("3 - success");
+        }
+        function failure() {
+            console.log("4 - failure");
+        }
+        function complete() {
+            console.log("5 - complete");
+        }
+    </script>
 }
 
-@using (Ajax.BeginForm(new AjaxOptions { }))
+@using (Ajax.BeginForm(new AjaxOptions
+{
+    OnBegin = "begin",
+    Confirm = "confirm",
+    OnComplete = "complete",
+    OnFailure = "failure",
+    OnSuccess = "success",
+    LoadingElementId = "loading",
+    LoadingElementDuration = 3000,
+    UpdateTargetId = "target"
+}))
 {
     <div class="form-horizontal">
         <h4>NewModel</h4>
@@ -40,6 +68,12 @@
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
+        </div>
+        <div id="loading" class="form-group" style="display:none">
+            <img src="/img/loading.gif" />
+        </div>
+        <div id="target">
+            <p>this ia target.</p>
         </div>
     </div>
 }
