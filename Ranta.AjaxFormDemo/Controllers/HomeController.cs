@@ -14,20 +14,20 @@ namespace Ranta.AjaxFormDemo.Controllers
             return View();
         }
 
-        public ActionResult List()
-        {
-            return View();
-        }
-
         public ActionResult New()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult New(NewModel model)
+        public JsonResult New(NewModel model)
         {
-            return View(model);
+            if (ModelState.IsValid)
+            {
+                ModelState.AddModelError("ok", "OK");
+            }
+
+            return Json(2);
         }
     }
 }
